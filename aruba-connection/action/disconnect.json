@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "access_token": "WgAEzWmbGe5GhLq4XGBjozD0200lykBV3kPrvPixzblSHwO03fSH14xOA8ytscDG",
+    "version": 1,
+    "sbTopic": "actions"
+  },
+  "actions": [
+    {
+      "deviceMac": "ac0bfb280f42",
+      "serviceUuid": null,
+      "value": null,
+      "characteristicUuid": null,
+      "actionId": "00000002",
+      "timeOut": 60,
+      "type": "bleDisconnect"
+    }
+  ],
+  "receiver": {
+    "apMac": "48:2f:6b:cd:2f:04",
+    "all": false
+  }
+}
