@@ -3,16 +3,19 @@ version: '3.8'
 services:
   nodejs:
     build:
-      context: ./nodejs
+      context: ./aruba-connection
+      dockerfile: Dockerfile.nodejs
     ports:
       - "3001:3001"
 
-  python:
-    build:
-      context: ./python
+  # python:
+  #   build:
+  #     context: ./aruba-connection
+  #     dockerfile: Dockerfile.python
 
   react:
     build:
-      context: ./react
+      context: ./front-end
+      dockerfile: Dockerfile.react
     ports:
       - "5173:5173"

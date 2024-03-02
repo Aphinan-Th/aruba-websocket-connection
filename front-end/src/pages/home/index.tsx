@@ -51,7 +51,7 @@ const Home: React.FC = () => {
   const [mapData, setMapData] = useState<DataType[]>();
 
   useEffect(() => {
-    const eventSource = new EventSource("https://153f-2001-44c8-44e7-5b06-7002-ffd1-89b-c7d2.ngrok-free.app/sse");
+    const eventSource = new EventSource("http://localhost:3001/sse");
 
     eventSource.onopen = () => console.log("SSE connection opened");
 
