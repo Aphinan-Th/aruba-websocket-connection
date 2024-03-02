@@ -1,13 +1,19 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import Home from "./pages/home";
+import ApplicationRoute from "./application.route";
 
 const { Header, Content, Footer } = Layout;
 
-const items = new Array(3).fill(null).map((_, index) => ({
-  key: String(index + 1),
-  label: `nav ${index + 1}`,
-}));
+const menuItems = [
+  {
+    key: "1",
+    label: "Home",
+  },
+  {
+    key: "2",
+    label: "Websocket Info",
+  },
+];
 
 const App: React.FC = () => {
   const {
@@ -30,8 +36,8 @@ const App: React.FC = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items}
+          defaultSelectedKeys={["1"]}
+          items={menuItems}
           style={{ flex: 1, minWidth: 0 }}
         />
       </Header>
@@ -48,7 +54,7 @@ const App: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          <Home></Home>
+          <ApplicationRoute />
         </div>
       </Content>
       <Footer style={{ textAlign: "center" }}>

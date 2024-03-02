@@ -156,17 +156,17 @@ def main():
             print("\nExiting ....\n")
             exit(0)
         elif ('2' == str.lower(user_input)):
-            send_sb_serialdata_msg('action_examples/co_rd_enocean.json')
+            send_sb_serialdata_msg('action/co_rd_enocean.json')
         elif ('3' == str.lower(user_input)):
             rv = read_custom_json_file()
             if rv is not None:
                 send_sb_serialdata_msg(rv)
         elif ('4' == str.lower(user_input)):
-            send_sb_ble_msg('action_examples/sb_action_set_1.json')
+            send_sb_ble_msg('action/sb_action_set_1.json')
         elif ('5' == str.lower(user_input)):
-            send_sb_ble_msg('action_examples/connect.json')
+            send_sb_ble_msg('action/connect.json')
         elif ('6' == str.lower(user_input)):
-            send_sb_ble_msg('action_examples/disconnect.json')
+            send_sb_ble_msg('action/disconnect.json')
         elif ('7' == str.lower(user_input)):
             rv = read_custom_json_file()
             if rv is not None:
