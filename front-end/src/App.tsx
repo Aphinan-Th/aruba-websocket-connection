@@ -6,12 +6,16 @@ const { Header, Content, Footer } = Layout;
 
 const menuItems = [
   {
-    key: "1",
-    label: "Home",
+    key: "/telemetry-websocket",
+    label: "Telemetry",
   },
   {
-    key: "2",
-    label: "Websocket Info",
+    key: "/ble-data",
+    label: "Ble Data",
+  },
+  {
+    key: "/connector",
+    label: "Connector",
   },
 ];
 
@@ -20,6 +24,8 @@ const App: React.FC = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const location = window.location.pathname;
+  const breadcrumbName = location.split("/").filter((i) => i);
   return (
     <Layout>
       <Header
@@ -36,20 +42,23 @@ const App: React.FC = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[location]}
           items={menuItems}
           style={{ flex: 1, minWidth: 0 }}
+          onSelect={({ key }) => {
+            window.location.href = key;
+          }}
         />
       </Header>
       <Content style={{ padding: "0 48px" }}>
         <Breadcrumb style={{ margin: "16px 0" }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>Websocket Info</Breadcrumb.Item>
+          <Breadcrumb.Item>{breadcrumbName}</Breadcrumb.Item>
         </Breadcrumb>
         <div
           style={{
             padding: 24,
-            minHeight: 380,
+            minHeight: "100vh",
             background: colorBgContainer,
             borderRadius: borderRadiusLG,
           }}

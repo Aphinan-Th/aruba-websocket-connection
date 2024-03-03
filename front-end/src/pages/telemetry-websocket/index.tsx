@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-// import "../../index.css"; // Import CSS file for styling
-import { Result } from "./type";
-import { Table, Tag, type TableProps } from "antd";
+import { Reporter, Response } from "../../interface/reponse";
+import { Table, Tag, type TableProps, notification } from "antd";
+import { Typography } from "antd";
+const { Paragraph } = Typography;
 
 interface DataType {
   key: string;
@@ -49,7 +50,7 @@ const columns: TableProps<DataType>["columns"] = [
     title: "Mac Address",
     dataIndex: "mac",
     key: "mac",
-    render: (text) => <a>{text}</a>,
+    render: (text) => <Paragraph copyable>{text}</Paragraph>,
   },
   {
     title: "Last Seen",
@@ -98,7 +99,6 @@ const columns: TableProps<DataType>["columns"] = [
       </>
     ),
   },
-
   {
     title: "Company Identifier",
     key: "companyIdentifier",
@@ -125,17 +125,16 @@ const columns: TableProps<DataType>["columns"] = [
   },
 ];
 
-const Home: React.FC = () => {
-  // const [messages, setMessages] = useState<DataType>();
+const TelemetryWebsocketPage: React.FC = () => {
   const [mapData, setMapData] = useState<DataType[]>();
+  const [reporter, setReporter] = useState<Reporter>();
 
   useEffect(() => {
     const eventSource = new EventSource("http://localhost:3001/sse");
-
     eventSource.onopen = () => console.log("SSE connection opened");
-
     eventSource.onmessage = (event) => {
-      const message = JSON.parse(event.data) as Result;
+      const message = JSON.parse(event.data) as Response;
+      setReporter(message.reporter);
       const mapData =
         message?.reported &&
         message?.reported?.map((item) => {
@@ -160,12 +159,15 @@ const Home: React.FC = () => {
             ],
           } as DataType;
         });
-
       mapData && setMapData(mapData);
     };
 
     eventSource.onerror = (error) => {
       console.error("SSE error:", error);
+      notification.error({
+        message: "SSE Error",
+        description: "An error occurred while connecting to the SSE server.",
+      });
       eventSource.close();
     };
 
@@ -175,7 +177,37 @@ const Home: React.FC = () => {
     };
   }, []);
 
-  return <Table columns={columns} dataSource={mapData} />;
+  return (
+    <>
+      <h2 style={{ marginBottom: "1rem" }}>Reporter</h2>
+      <p>
+        <strong>Name :</strong> {reporter?.name}
+      </p>
+      <p>
+        <strong>Mac :</strong> {reporter?.mac}
+      </p>
+      <p>
+        <strong>HwType :</strong> {reporter?.hwType}
+      </p>
+      <p>
+        <strong>SwVersion :</strong> {reporter?.swVersion}
+      </p>
+      <p>
+        <strong>SwBuild :</strong> {reporter?.swBuild}
+      </p>
+      <p>
+        <strong>Time :</strong> {reporter?.time}
+      </p>
+      <p>
+        <strong>IP v4 :</strong> {reporter?.ipv4}
+      </p>
+      <Table
+        columns={columns}
+        dataSource={mapData}
+        style={{ marginTop: "1rem" }}
+      />
+    </>
+  );
 };
 
-export default Home;
+export default TelemetryWebsocketPage;

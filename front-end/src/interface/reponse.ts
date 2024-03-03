@@ -4,13 +4,23 @@
 //
 //   const welcome = Convert.toWelcome(json);
 
-export interface Result {
+export interface Response {
     meta: Meta;
     reporter: Reporter;
     reported: Reported[];
     bleData?: BleData[];
+    results?: Result[];
 }
 
+export interface Result {
+    actionId: string;
+    type: string;
+    deviceMac: string;
+    status: string;
+    statusString: string;
+    apbMac: string;
+}
+   
 export interface BleData {
     mac: string;
     frameType: string;
@@ -68,11 +78,11 @@ export interface Reporter {
 
 // Converts JSON strings to/from your types
 export class Convert {
-    public static toWelcome(json: string): Result {
+    public static toWelcome(json: string): Response {
         return JSON.parse(json);
     }
 
-    public static welcomeToJson(value: Result): string {
+    public static welcomeToJson(value: Response): string {
         return JSON.stringify(value);
     }
 }

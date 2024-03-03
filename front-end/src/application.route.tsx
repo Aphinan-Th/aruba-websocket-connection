@@ -6,8 +6,9 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Home from "./pages/home";
-import BleData from "./pages/bleData";
+import YourComponent from "./pages/connector";
+import BleDataPage from "./pages/ble-data";
+import TelemetryWebsocketPage from "./pages/telemetry-websocket";
 
 const ApplicationRoute = (): JSX.Element => {
   const router = createBrowserRouter(
@@ -15,8 +16,9 @@ const ApplicationRoute = (): JSX.Element => {
       <Route element={<Outlet />}>
         <Route path="*" element={<Navigate to="/home" replace />} />
         <Route path="/" element={<Outlet />}>
-          <Route path="home" element={<Home />} />
-          <Route path="ble-data" element={<BleData />} />
+          <Route path="telemetry-websocket" element={<TelemetryWebsocketPage />} />
+          <Route path="ble-data" element={<BleDataPage />} />
+          <Route path="connector" element={<YourComponent />} />
         </Route>
       </Route>
     ),
