@@ -66,10 +66,24 @@ const YourComponent: React.FC = () => {
     };
   }, []);
 
+  function encodeHexStringToBase64(hex: string): string {
+    const bytes = hex.match(/.{1,2}/g)?.map(byte => parseInt(byte, 16));
+    if (bytes) {
+      return btoa(String.fromCharCode.apply(null, bytes));
+    } else {
+      throw new Error("Invalid hexadecimal string");
+    }
+  }
+
   const onFinish = async (values: JsonMessage) => {
     console.log("Form submitted:", values);
 
     try {
+      values.receiver.apMac = encodeHexStringToBase64(values.receiver.apMac);
+      values.actions.forEach((action) => {
+        action.deviceMac = encodeHexStringToBase64(action.deviceMac);
+      });
+
       await axios.post("http://127.0.0.1:3001/sb_api", values, {
         validateStatus: () => true,
       });

@@ -2,7 +2,7 @@
   "name": "aruba_ws_iot",
   "version": "1.0.0",
   "description": "iot endpoint server for aruba telmetry stream",
-  "main": "aruba-ws-test-endpoint.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

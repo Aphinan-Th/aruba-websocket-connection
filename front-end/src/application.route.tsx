@@ -14,8 +14,9 @@ const ApplicationRoute = (): JSX.Element => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route element={<Outlet />}>
-        <Route path="*" element={<Navigate to="/home" replace />} />
-        <Route path="/" element={<Outlet />}>
+        <Route path="/" element={<Navigate to="/telemetry-websocket" replace />} />
+        <Route path="*" element={<Navigate to="/telemetry-websocket" replace />} />
+        <Route path="" element={<Outlet />}>
           <Route path="telemetry-websocket" element={<TelemetryWebsocketPage />} />
           <Route path="ble-data" element={<BleDataPage />} />
           <Route path="connector" element={<YourComponent />} />
