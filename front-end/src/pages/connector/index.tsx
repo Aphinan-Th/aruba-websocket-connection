@@ -50,35 +50,35 @@ const YourComponent: React.FC = () => {
       if (message.results) {
         setResults(message.results);
       }
-      setResults([
-        {
-          actionId: "00000001",
-          type: "bleConnect",
-          deviceMac: "a0e6f8407c08",
-          status: "failureGeneric",
-          statusString:
-            "Invalid state, operation disallowed in this state(07cf00080000)",
-          apbMac: "28de65791acb",
-        },
-        {
-          actionId: "00000001",
-          type: "bleConnect",
-          deviceMac: "a0e6f8407c08",
-          status: "failureGeneric",
-          statusString:
-            "Invalid state, operation disallowed in this state(07cf00080000)",
-          apbMac: "28de65791acb",
-        },
-        {
-          actionId: "00000001",
-          type: "bleConnect",
-          deviceMac: "a0e6f8407c08",
-          status: "failureGeneric",
-          statusString:
-            "Invalid state, operation disallowed in this state(07cf00080000)",
-          apbMac: "28de65791acb",
-        },
-      ]);
+      // setResults([
+      //   {
+      //     actionId: "00000001",
+      //     type: "bleConnect",
+      //     deviceMac: "a0e6f8407c08",
+      //     status: "failureGeneric",
+      //     statusString:
+      //       "Invalid state, operation disallowed in this state(07cf00080000)",
+      //     apbMac: "28de65791acb",
+      //   },
+      //   {
+      //     actionId: "00000001",
+      //     type: "bleConnect",
+      //     deviceMac: "a0e6f8407c08",
+      //     status: "failureGeneric",
+      //     statusString:
+      //       "Invalid state, operation disallowed in this state(07cf00080000)",
+      //     apbMac: "28de65791acb",
+      //   },
+      //   {
+      //     actionId: "00000001",
+      //     type: "bleConnect",
+      //     deviceMac: "a0e6f8407c08",
+      //     status: "failureGeneric",
+      //     statusString:
+      //       "Invalid state, operation disallowed in this state(07cf00080000)",
+      //     apbMac: "28de65791acb",
+      //   },
+      // ]);
     };
 
     eventSource.onerror = (error) => {
