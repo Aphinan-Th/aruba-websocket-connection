@@ -9,6 +9,7 @@ import {
   notification,
   Flex,
   Tag,
+  Divider,
 } from "antd";
 import axios from "axios";
 
@@ -49,6 +50,35 @@ const YourComponent: React.FC = () => {
       if (message.results) {
         setResults(message.results);
       }
+      setResults([
+        {
+          actionId: "00000001",
+          type: "bleConnect",
+          deviceMac: "a0e6f8407c08",
+          status: "failureGeneric",
+          statusString:
+            "Invalid state, operation disallowed in this state(07cf00080000)",
+          apbMac: "28de65791acb",
+        },
+        {
+          actionId: "00000001",
+          type: "bleConnect",
+          deviceMac: "a0e6f8407c08",
+          status: "failureGeneric",
+          statusString:
+            "Invalid state, operation disallowed in this state(07cf00080000)",
+          apbMac: "28de65791acb",
+        },
+        {
+          actionId: "00000001",
+          type: "bleConnect",
+          deviceMac: "a0e6f8407c08",
+          status: "failureGeneric",
+          statusString:
+            "Invalid state, operation disallowed in this state(07cf00080000)",
+          apbMac: "28de65791acb",
+        },
+      ]);
     };
 
     eventSource.onerror = (error) => {
@@ -67,7 +97,7 @@ const YourComponent: React.FC = () => {
   }, []);
 
   function encodeHexStringToBase64(hex: string): string {
-    const bytes = hex.match(/.{1,2}/g)?.map(byte => parseInt(byte, 16));
+    const bytes = hex.match(/.{1,2}/g)?.map((byte) => parseInt(byte, 16));
     if (bytes) {
       return btoa(String.fromCharCode.apply(null, bytes));
     } else {
@@ -103,32 +133,38 @@ const YourComponent: React.FC = () => {
 
   return (
     <div style={{ display: "flex" }}>
-      {/* Left Section - Response */}
       <div style={{ flex: 1, padding: "20px" }}>
         <h2 style={{ marginBottom: "1rem" }}>Actions Results</h2>
+        <Divider />
         {results?.map((result, index) => (
-          <div key={index} style={{ marginBottom: "1rem" }}>
-            <h3>Action {index + 1}</h3>
+          <div
+            key={index}
+            style={{
+              background: index % 2 === 0 ? "#e6f7ff" : "#f6ffed",
+              padding: "8px",
+              margin: "1rem",
+            }}
+          >
             <p>
-              <strong>Action ID:</strong> {result.actionId}
+              <strong>Action ID: </strong> {result.actionId}
             </p>
             <p>
-              <strong>Type:</strong> {result.type}
+              <strong>Type: </strong> {result.type}
             </p>
             <p>
-              <strong>Device MAC:</strong> {result.deviceMac}
+              <strong>Device MAC: </strong> {result.deviceMac}
             </p>
             <p>
-              <strong>Status:</strong>
+              <strong>Status: </strong>
               <Tag color={result.status === "success" ? "green" : "red"}>
                 {result.status.toUpperCase()}
               </Tag>
             </p>
             <p>
-              <strong>Status String:</strong> {result.statusString}
+              <strong>Status String: </strong> {result.statusString}
             </p>
             <p>
-              <strong>APB MAC:</strong> {result.apbMac}
+              <strong>APB MAC: </strong> {result.apbMac}
             </p>
           </div>
         ))}
@@ -136,6 +172,7 @@ const YourComponent: React.FC = () => {
       {/* Right Section - Form */}
       <div style={{ flex: 1, padding: "20px" }}>
         <h2 style={{ marginBottom: "1rem" }}>Actions</h2>
+        <Divider />
         <Form
           form={form}
           onFinish={onFinish}

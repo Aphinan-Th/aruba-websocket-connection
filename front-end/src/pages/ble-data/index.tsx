@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Table, Tag, type TableProps, notification } from "antd";
+import {
+  Table,
+  Tag,
+  type TableProps,
+  notification,
+  Divider,
+  Col,
+  Row,
+} from "antd";
 import { Reporter, Response } from "../../interface/reponse";
+import { Typography } from "antd";
+const { Paragraph } = Typography;
 
 interface DataType {
   key: string;
@@ -17,7 +27,7 @@ const columns: TableProps<DataType>["columns"] = [
     title: "Mac Address",
     dataIndex: "mac",
     key: "mac",
-    render: (text) => <a>{text}</a>,
+    render: (text) => <Paragraph copyable style={{ padding: "0", margin: "0" }}>{text}</Paragraph>,
   },
   {
     title: "Frame Type",
@@ -123,27 +133,46 @@ const BleDataPage: React.FC = () => {
   return (
     <>
       <h2 style={{ marginBottom: "1rem" }}>Reporter</h2>
-      <p>
-        <strong>Name :</strong> {reporter?.name}
-      </p>
-      <p>
-        <strong>Mac :</strong> {reporter?.mac}
-      </p>
-      <p>
+      <Divider />
+      <div>
+        <Row gutter={[16, 16]}>
+          {" "}
+          {/* Adjust gutter as needed */}
+          <Col>
+            <div style={{ background: "#e6f7ff", padding: "8px" }}>
+              <p>
+                <strong>Name :</strong> {reporter?.name}
+              </p>
+            </div>
+          </Col>
+          <Col>
+            <div
+              style={{ background: "#f6ffed", padding: "8px", display: "flex" }}
+            >
+              <strong>Mac : </strong>
+              <Paragraph copyable style={{ padding: "0", margin: "0" }}>
+                {reporter?.mac}
+              </Paragraph>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      <div style={{ padding: "8px 0 0 8px" }}>
         <strong>HwType :</strong> {reporter?.hwType}
-      </p>
-      <p>
+      </div>
+      <div style={{ paddingLeft: "8px" }}>
         <strong>SwVersion :</strong> {reporter?.swVersion}
-      </p>
-      <p>
+      </div>
+      <div style={{ paddingLeft: "8px" }}>
         <strong>SwBuild :</strong> {reporter?.swBuild}
-      </p>
-      <p>
+      </div>
+      <div style={{ paddingLeft: "8px" }}>
         <strong>Time :</strong> {reporter?.time}
-      </p>
-      <p>
+      </div>
+      <div style={{ paddingLeft: "8px" }}>
         <strong>IP v4 :</strong> {reporter?.ipv4}
-      </p>
+      </div>
+      <Divider />
       <Table
         columns={columns}
         dataSource={mapData}
