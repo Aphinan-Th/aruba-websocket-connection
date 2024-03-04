@@ -226,7 +226,6 @@ const TelemetryWebsocketPage: React.FC = () => {
         <strong>IP v4 :</strong> {reporter?.ipv4}
       </div>
       <Divider />
-      <Divider />
       <Table
         columns={columns}
         dataSource={mapData}
